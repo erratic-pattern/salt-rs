@@ -1,9 +1,12 @@
 [package]
-name = "salt-rs"
+name = "salt"
 authors = ["Adam Curtis <kallisti-dev@gmail.com"]
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
 license-file = "LICENSE"
+
+[workspace]
+members = [ "salt-macros" ]
 
 [dependencies]
