@@ -1,7 +1,9 @@
 [package]
 name = "salt-macros"
+authors = ["Adam Curtis <kallisti-dev@gmail.com"]
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 
 [lib]
 proc-macro = true
@@ -13,4 +15,3 @@ glob = "0.3.1"
 proc-macro2 = "1.0.56"
 quote = "1.0.26"
 syn = { version = "2.0.15", features = ["full"] }
-thiserror = "1.0.40"
