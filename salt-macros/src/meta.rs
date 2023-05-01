@@ -7,7 +7,7 @@ use crate::{error::new_spanned_err, symbol::MODULES};
 
 #[derive(Default)]
 pub struct BinMeta {
-    modules: Vec<PathBuf>,
+    modules: Option<Vec<PathBuf>>,
 }
 
 impl BinMeta {
@@ -15,16 +15,14 @@ impl BinMeta {
     #[allow(dead_code)]
 
     fn new() -> Self {
-        Self {
-            modules: Vec::new(),
-        }
+        Self { modules: None }
     }
 }
 
 pub fn parse_bin_meta(meta: Meta) -> syn::Result<BinMeta> {
     parse_nested_meta_with_default(meta, |parsed: &mut BinMeta, meta| {
         if meta.path == MODULES {
-            parsed.modules = parse_modules_meta(&meta)?;
+            parsed.modules = Some(parse_modules_meta(&meta)?);
         }
         Ok(())
     })
@@ -32,23 +30,21 @@ pub fn parse_bin_meta(meta: Meta) -> syn::Result<BinMeta> {
 
 #[derive(Default)]
 pub struct MainMeta {
-    modules: Vec<PathBuf>,
+    modules: Option<Vec<PathBuf>>,
 }
 
 impl MainMeta {
     // Constructs an empty MainInput
     #[allow(dead_code)]
     fn new() -> Self {
-        Self {
-            modules: Vec::new(),
-        }
+        Self { modules: None }
     }
 }
 
 pub fn parse_main_meta(meta: Meta) -> syn::Result<MainMeta> {
     parse_nested_meta_with_default(meta, |parsed: &mut MainMeta, meta| {
         if meta.path == MODULES {
-            parsed.modules = parse_modules_meta(&meta)?;
+            parsed.modules = Some(parse_modules_meta(&meta)?);
         }
         Ok(())
     })
